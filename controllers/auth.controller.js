@@ -16,7 +16,7 @@ export const registerUser = catchAsyncError(async (req, res, next) => {
         }
 
         // ✅ Check if user is already registered (with verified account)
-        const isRegistered = await UserModel.exists({ email, accountVerificatied: true });
+        const isRegistered = await UserModel.exists({ email, accountVerificatied: false });
         if (isRegistered) {
             return next(new ErrorHandler("User already registered", 400));
         }
