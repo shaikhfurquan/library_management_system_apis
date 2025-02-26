@@ -5,6 +5,8 @@ import cors from 'cors'
 import morgan from 'morgan';
 import fileUpload from 'express-fileupload'
 import cookieParser from 'cookie-parser';
+import { errorMiddleware } from './middlewares/errorMiddleware.js';
+import authRouter from './routes/auth.route.js';
 
 const app = express();
 
@@ -25,7 +27,12 @@ app.get('/test', (req, res) => {
 
 
 // routes
+app.get('/', (req, res) => {
+    res.send('test routes');
+})
+app.use('/api/v1/auth' , authRouter)
 
-
+// error middleware
+app.use(errorMiddleware)
 
 export { app }
