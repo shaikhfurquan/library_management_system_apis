@@ -1,0 +1,41 @@
+
+AUTH APIS DOCS:
+
+REGISTER USER API:
+POST  ==>  http://localhost:3333/api/v1/auth/register
+BODY:
+{
+    "name" : "sf",
+    "email" : "s@gmail.com",
+    "password" : "12345678"
+}
+
+CURL:
+curl --location 'http://localhost:3333/api/v1/auth/register' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M4NTU3YWI3OGZkMjBiMzAzMTdjZjIiLCJpYXQiOjE3NDExODIzODIsImV4cCI6MTc0MTQ0MTU4Mn0.V89eJAmozELyV5K7s4QetY5qW9vcPVxuN3AqymS_PB0' \
+--data-raw '{
+    "name" : "sf",
+    "email" : "s@gmail.com",
+    "password" : "12345678"
+}'
+
+
+
+VERIFY OTP API:
+POST  ==>  http://localhost:3333/api/v1/auth/verify-otp
+
+BODY:
+    {
+    "email" : "s@gmail.com",
+    "otp": "96284"
+}
+
+CURL:
+curl --location 'http://localhost:3333/api/v1/auth/verify-otp' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M4NTU3YWI3OGZkMjBiMzAzMTdjZjIiLCJpYXQiOjE3NDExODIzODIsImV4cCI6MTc0MTQ0MTU4Mn0.V89eJAmozELyV5K7s4QetY5qW9vcPVxuN3AqymS_PB0' \
+--data-raw '{
+    "email" : "s@gmail.com",
+    "otp": "96284"
+}'
