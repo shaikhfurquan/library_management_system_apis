@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken'
 
 const userSchema = new mongoose.Schema({
 
@@ -22,7 +23,7 @@ const userSchema = new mongoose.Schema({
         enum: ["Admin", "User"],
         default: "User"
     },
-    accountVerificatied: {
+    accountVerified: {
         type: Boolean,
         default: false
     },
@@ -71,6 +72,11 @@ userSchema.methods.generateVerificationCode = function () {
 
     return this.verificationCode;
 };
+
+// Generating the token
+userSchema.methods.generateToken = function () {
+    return jwt.sign({_id : this._id} , process.env.JWT_SECRET_KEY , {expiresIn : process.env.JWT_EXPIRATION})
+}
 
 const UserModel = mongoose.model('User', userSchema)
 
