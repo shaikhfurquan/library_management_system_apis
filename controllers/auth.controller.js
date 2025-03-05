@@ -3,6 +3,7 @@ import ErrorHandler, { errorMiddleware } from "../middlewares/errorMiddleware.js
 import UserModel from "../models/user.model.js";
 import bcrypt from 'bcrypt';
 import { sendVerificationCode } from "../utils/sendVerificationCode.js";
+import { sendToken } from "../utils/sendToken.js";
 
 
 export const registerUser = catchAsyncError(async (req, res, next) => {
@@ -57,3 +58,55 @@ export const registerUser = catchAsyncError(async (req, res, next) => {
         next(error);
     }
 });
+
+
+export const verifyOtp = catchAsyncError(async (req, res, next) => {
+    try {
+        const { email, otp } = req.body;
+        if (!email || !otp) {
+            return next(new ErrorHandler("Please provide email and otp", 400))
+        }
+        const userAllEntries = await UserModel.find({
+            email,
+            accountVerified: false
+        }).sort({ createdAt: -1 })
+        console.log("userAllEntries", userAllEntries);
+
+        if (!userAllEntries) {
+            return next(new ErrorHandler("user not found", 404))
+        }
+
+        let user;
+        if (userAllEntries.length > 1) {
+            user = userAllEntries[0]
+            await UserModel.deleteMany({
+                _id: { $ne: user._id },
+                email,
+                accountVerified: false
+            })
+        } else {
+            user = userAllEntries[0];
+        }
+
+        if (user.verificationCode !== Number(otp)) {
+            return next(new ErrorHandler("Invalid verification OTP code", 400))
+        }
+
+        const currentTime = Date.now();
+        const verificationCodeExpiryTime = new Date(user.verificationCodeExpire).getTime()
+
+        if (currentTime > verificationCodeExpiryTime) {
+            return next(new ErrorHandler('OTP Expired', 400))
+        }
+
+        user.accountVerified = true
+        user.verificationCode = null;
+        user.verificationCodeExpire = null;
+        await user.save({ validateModifiedOnly: true });
+
+        sendToken(user, 200, "Account Verified", res)
+
+    } catch (error) {
+        return next(new ErrorHandler("OTP Verification Failed", 500))
+    }
+})
