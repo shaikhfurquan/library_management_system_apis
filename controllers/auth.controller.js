@@ -2,7 +2,6 @@ import { catchAsyncError } from "../middlewares/catchAsyncError.js";
 import ErrorHandler, { errorMiddleware } from "../middlewares/errorMiddleware.js";
 import UserModel from "../models/user.model.js";
 import bcrypt from 'bcrypt';
-import crypto from 'crypto';
 import { sendVerificationCode } from "../utils/sendVerificationCode.js";
 
 
@@ -16,7 +15,7 @@ export const registerUser = catchAsyncError(async (req, res, next) => {
         }
 
         // ✅ Check if user is already registered (with verified account)
-        const isRegistered = await UserModel.exists({ email, accountVerificatied: false });
+        const isRegistered = await UserModel.exists({ email, accountVerified: true });
         if (isRegistered) {
             return next(new ErrorHandler("User already registered", 400));
         }
@@ -24,7 +23,7 @@ export const registerUser = catchAsyncError(async (req, res, next) => {
         // ✅ Limit registration attempts
         const registrationAttemptByUser = await UserModel.find({
             email,
-            accountVerificatied: false,
+            accountVerified: false,
         })
         if (registrationAttemptByUser >= 5) {
             return next(new ErrorHandler("Too many registration attempts. Please try again later", 400))
