@@ -58,3 +58,10 @@ curl --location 'http://localhost:3333/api/v1/auth/login' \
     "email" : "s@gmail.com",
     "password" : "12345678"
 }'
+
+
+USER LOGOUT API:
+GET  ==>  http://localhost:3333/api/v1/auth/logout
+
+CURL:
+curl --location 'http://localhost:3333/api/v1/auth/logout'
