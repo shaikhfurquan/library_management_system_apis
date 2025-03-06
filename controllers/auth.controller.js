@@ -110,3 +110,22 @@ export const verifyOtp = catchAsyncError(async (req, res, next) => {
         return next(new ErrorHandler("OTP Verification Failed", 500))
     }
 })
+
+
+export const loginUser = catchAsyncError(async (req, res, next) => {
+    const { email, password } = req.body
+    if (!email || !password) {
+        return next(new ErrorHandler("Email and password is required", 400))
+    }
+
+    const user = await UserModel.findOne({ email, accountVerified: true }).select("+password")
+    if (!user) {
+        return next(new ErrorHandler("User not found", 400))
+    }
+
+    const isPasswordMatch = await bcrypt.compare(password, user.password)
+    if (!isPasswordMatch) {
+        return next(new ErrorHandler("Invalid email or password", 400))
+    }
+    sendToken(user, 200, `Welcome ${user.name}`, res)
+})

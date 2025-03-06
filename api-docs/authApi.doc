@@ -24,9 +24,8 @@ curl --location 'http://localhost:3333/api/v1/auth/register' \
 
 VERIFY OTP API:
 POST  ==>  http://localhost:3333/api/v1/auth/verify-otp
-
 BODY:
-    {
+{
     "email" : "s@gmail.com",
     "otp": "96284"
 }
@@ -38,4 +37,24 @@ curl --location 'http://localhost:3333/api/v1/auth/verify-otp' \
 --data-raw '{
     "email" : "s@gmail.com",
     "otp": "96284"
+}'
+
+
+LOGIN USER API:
+POST  ==>  http://localhost:3333/api/v1/auth/login
+BODY
+{
+    "username" : "sf",
+    "email" : "s@gmail.com",
+    "password" : "12345678"
+}
+
+CURL:
+curl --location 'http://localhost:3333/api/v1/auth/login' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M4NTc5ZWUyZTBiMWNiZGUzOGQ0NDciLCJpYXQiOjE3NDEyNjM5OTAsImV4cCI6MTc0MTUyMzE5MH0.LEF4BmxbcMMo8u6PAOrNTaWLchY38kAFEbIof1AfYKA' \
+--data-raw '{
+    "username" : "sf",
+    "email" : "s@gmail.com",
+    "password" : "12345678"
 }'
