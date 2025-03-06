@@ -40,6 +40,8 @@ curl --location 'http://localhost:3333/api/v1/auth/verify-otp' \
 }'
 
 
+
+
 LOGIN USER API:
 POST  ==>  http://localhost:3333/api/v1/auth/login
 BODY
@@ -60,8 +62,20 @@ curl --location 'http://localhost:3333/api/v1/auth/login' \
 }'
 
 
+
+
 USER LOGOUT API:
 GET  ==>  http://localhost:3333/api/v1/auth/logout
 
 CURL:
 curl --location 'http://localhost:3333/api/v1/auth/logout'
+
+
+
+
+USER PROFILE API:
+GET  ==>  http://localhost:3333/api/v1/auth/logout
+
+CURL:
+curl --location 'http://localhost:3333/api/v1/auth/profile' \
+--header 'Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M4NTc5ZWUyZTBiMWNiZGUzOGQ0NDciLCJpYXQiOjE3NDEyNjk2MDUsImV4cCI6MTc0MTUyODgwNX0.ydpzwyE6_bvSQdytN7nEo6znNjSCvF96LzvWKxjMMhI'
