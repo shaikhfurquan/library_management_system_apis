@@ -113,42 +113,24 @@ export const verifyOtp = catchAsyncError(async (req, res, next) => {
 
 
 export const loginUser = catchAsyncError(async (req, res, next) => {
-    const { email, password } = req.body
-    if (!email || !password) {
-        return next(new ErrorHandler("Email and password is required", 400))
+    try {
+        const { email, password } = req.body
+        if (!email || !password) {
+            return next(new ErrorHandler("Email and password is required", 400))
+        }
+    
+        const user = await UserModel.findOne({ email, accountVerified: true }).select("+password")
+        if (!user) {
+            return next(new ErrorHandler("User not found", 400))
+        }
+    
+        const isPasswordMatch = await bcrypt.compare(password, user.password)
+        if (!isPasswordMatch) {
+            return next(new ErrorHandler("Invalid email or password", 400))
+        }
+        sendToken(user, 200, `Welcome ${user.name}`, res)
+    } catch (error) {
+        next(error)
     }
-
-    const user = await UserModel.findOne({ email, accountVerified: true }).select("+password")
-    if (!user) {
-        return next(new ErrorHandler("User not found", 400))
-    }
-
-    const isPasswordMatch = await bcrypt.compare(password, user.password)
-    if (!isPasswordMatch) {
-        return next(new ErrorHandler("Invalid email or password", 400))
-    }
-    sendToken(user, 200, `Welcome ${user.name}`, res)
 })
 
-
-export const logoutUser = catchAsyncError(async (req, res, next) => {
-    res
-        .status(200)
-        .cookie('token', "", {
-            expires: new Date(Date.now()),
-            httpOnly: true
-        })
-        .json({
-            success: true,
-            message: "Logged out successfully"
-        });
-})
-
-export const getUserProfile = catchAsyncError(async (req, res, next) => {
-    const user = req.user
-    res.status(200)
-        .json({
-            success: true,
-            user
-        });
-})
