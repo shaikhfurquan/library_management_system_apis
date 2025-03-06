@@ -22,3 +22,4 @@ export const generateVerificationOtpEmailTemplate = (otpCode) => {
     </html>
     `;
 }
+
