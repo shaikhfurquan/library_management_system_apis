@@ -96,3 +96,24 @@ curl --location 'http://localhost:3333/api/v1/auth/password/forgot' \
 --data-raw '{
     "email" : "s@gmail.com"
 }'
+
+
+
+RESET PASSWORD API:
+PUT  ==>  http://localhost:3333/api/v1/auth/password/reset/77cfdf4f33f3a3e6e214df7ebb85ed0be452bdee
+
+BODY
+{
+    "password" : "asdf1234",
+    "confirmPassword" : "asdf1234"
+}
+
+
+CURL:
+curl --location --request PUT 'http://localhost:3333/api/v1/auth/password/reset/77cfdf4f33f3a3e6e214df7ebb85ed0be452bdee' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M4NTc5ZWUyZTBiMWNiZGUzOGQ0NDciLCJpYXQiOjE3NDEzNzY4NTYsImV4cCI6MTc0MTYzNjA1Nn0.TH9vmGd6XIt5uAh0wi0L0T-BCSHn_9wTbQXj9Lm5IDs' \
+--data '{
+    "password" : "asdf1234",
+    "confirmPassword" : "asdf1234"
+}'

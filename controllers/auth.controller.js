@@ -2,6 +2,7 @@ import { catchAsyncError } from "../middlewares/catchAsyncError.js";
 import ErrorHandler, { errorMiddleware } from "../middlewares/errorMiddleware.js";
 import UserModel from "../models/user.model.js";
 import bcrypt from 'bcrypt';
+import crypto from 'crypto';
 import { sendVerificationCode } from "../utils/sendVerificationCode.js";
 import { sendToken } from "../utils/sendToken.js";
 import { sendEmail } from "../utils/sendEmail.js";
@@ -194,5 +195,39 @@ export const forgotPassword = catchAsyncError(async (req, res, next) => {
         user.resetPasswordExpire = undefined;
         await user.save({ validateBeforeSave: false });
         return next(new ErrorHandler(error.message, 400));
+    }
+})
+
+
+export const resetPassword = catchAsyncError(async (req, res, next) => {
+    try {
+        const { token } = req.params
+        const resetPasswordToken = crypto.createHash('sha256').update(token).digest('hex')
+        const user = await UserModel.findOne({
+            resetPasswordToken,
+            resetPasswordExpire: { $gt: Date.now() }
+        })
+        if (!user) {
+            return next(new ErrorHandler('Reset password token is invalid', 400));
+        }
+        const { password, confirmPassword } = req.body
+        if (password !== confirmPassword) {
+            return next(new ErrorHandler('Password and confirm password does not match', 400))
+        }
+
+        // ✅ Validate password length
+        if (password.length < 8 || password.length > 16 || confirmPassword.length < 8 || confirmPassword.length > 16) {
+            return next(new ErrorHandler("Password must be between 8 and 16 characters", 400));
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10)
+        user.password = hashedPassword
+        user.resetPasswordToken = undefined
+        user.resetPasswordExpire = undefined
+        await user.save({ validateBeforeSave: false })
+        sendToken(user, 200, 'Password reset successfully', res)
+
+    } catch (error) {
+        next(error)
     }
 })

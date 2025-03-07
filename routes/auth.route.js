@@ -11,5 +11,6 @@ authRouter.post('/login', authController.loginUser)
 authRouter.get('/logout', isAuthenticated, authController.logoutUser)
 authRouter.get('/profile', isAuthenticated, authController.getUserProfile)
 authRouter.post('/password/forgot', authController.forgotPassword)
+authRouter.put('/password/reset/:token', authController.resetPassword)
 
 export default authRouter
