@@ -36,6 +36,8 @@ export const generateForgotPasswordEmailTemplate = (resetPasswordUrl) => {
                 Reset Password
             </a>
         </div>
+        <p>Or copy and paste this link into your browser:</p>
+        <p style="word-break: break-all; color: #007bff;">${resetPasswordUrl}</p>
         <p>If you didn't request a password reset, you can safely ignore this email.</p>
         <p>Thanks,<br>The Support Team</p>
     </div>

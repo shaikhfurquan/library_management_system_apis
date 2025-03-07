@@ -79,3 +79,20 @@ GET  ==>  http://localhost:3333/api/v1/auth/logout
 CURL:
 curl --location 'http://localhost:3333/api/v1/auth/profile' \
 --header 'Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M4NTc5ZWUyZTBiMWNiZGUzOGQ0NDciLCJpYXQiOjE3NDEyNjk2MDUsImV4cCI6MTc0MTUyODgwNX0.ydpzwyE6_bvSQdytN7nEo6znNjSCvF96LzvWKxjMMhI'
+
+
+
+FORGOT PASSWORD API:
+POST  ==>  http://localhost:3333/api/v1/auth/password/forgot
+
+BODY
+{
+    "email" : "s@gmail.com"
+}
+
+CURL:
+curl --location 'http://localhost:3333/api/v1/auth/password/forgot' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "email" : "s@gmail.com"
+}'

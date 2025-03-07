@@ -10,5 +10,6 @@ authRouter.post('/verify-otp', authController.verifyOtp)
 authRouter.post('/login', authController.loginUser)
 authRouter.get('/logout', isAuthenticated, authController.logoutUser)
 authRouter.get('/profile', isAuthenticated, authController.getUserProfile)
+authRouter.post('/password/forgot', authController.forgotPassword)
 
 export default authRouter
