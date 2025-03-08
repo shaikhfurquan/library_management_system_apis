@@ -117,3 +117,26 @@ curl --location --request PUT 'http://localhost:3333/api/v1/auth/password/reset/
     "password" : "asdf1234",
     "confirmPassword" : "asdf1234"
 }'
+
+
+
+UPDATE PASSWORD API:
+PUT  ==>  http://localhost:3333/api/v1/auth/password/update
+
+BODY
+{
+    "currentPassword" : "asdf1234",
+    "newPassword" : "12345678",
+    "confirmNewPassword" : "12345678"
+}
+
+
+CURL:
+curl --location --request PUT 'http://localhost:3333/api/v1/auth/password/update' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M4NTc5ZWUyZTBiMWNiZGUzOGQ0NDciLCJpYXQiOjE3NDEzNzY4ODcsImV4cCI6MTc0MTYzNjA4N30.L9Cx4JLQPdSAeO5VVIC-bIOjAEsMVJaNjjkwHSD8Jl8' \
+--data '{
+    "currentPassword" : "asdf1234",
+    "newPassword" : "12345678",
+    "confirmNewPassword" : "12345678"
+}'
