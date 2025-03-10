@@ -7,6 +7,7 @@ import fileUpload from 'express-fileupload'
 import cookieParser from 'cookie-parser';
 import { errorMiddleware } from './middlewares/errorMiddleware.js';
 import authRouter from './routes/auth.route.js';
+import bookRouter from './routes/book.route.js';
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.get('/', (req, res) => {
     res.send('test routes');
 })
 app.use('/api/v1/auth' , authRouter)
+app.use('/api/v1/book' , bookRouter)
 
 // error middleware
 app.use(errorMiddleware)
