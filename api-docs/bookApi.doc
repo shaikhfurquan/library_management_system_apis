@@ -1,0 +1,42 @@
+BOOK APIS DOCS:
+
+ADD BOOK API:
+POST  ==>  http://localhost:3333/api/v1/book/admin/add
+BODY
+{
+    "title" : "sub mind",
+    "author" : "subs",
+    "description" : "About the every steps",
+    "price" : "150",
+    "quantity" : 20
+}
+
+CURL:
+curl --location 'http://localhost:3333/api/v1/book/admin/add' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M4NTc5ZWUyZTBiMWNiZGUzOGQ0NDciLCJpYXQiOjE3NDE1OTcyMTAsImV4cCI6MTc0MTg1NjQxMH0.SErAjNmmAOG7nskHOi7UIgAWuGO_LdRxNzAj8Tbsj54' \
+--data '{
+    "title" : "sub mind",
+    "author" : "subs",
+    "description" : "About the every steps",
+    "price" : "150",
+    "quantity" : 20
+}'
+
+
+
+
+GET ALL BOOKS:
+GET  ==>  http://localhost:3333/api/v1/book/all
+
+CURL:
+curl --location 'http://localhost:3333/api/v1/book/all' \
+--header 'Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M4NTc5ZWUyZTBiMWNiZGUzOGQ0NDciLCJpYXQiOjE3NDE1OTcyMTAsImV4cCI6MTc0MTg1NjQxMH0.SErAjNmmAOG7nskHOi7UIgAWuGO_LdRxNzAj8Tbsj54'
+
+
+
+
+DELETE BOOK API:
+DELETE  ==>  http://localhost:3333/api/v1/book/admin/67cebde678cbabf3708ee976
+             http://localhost:3333/api/v1/book/admin/bookId
+
