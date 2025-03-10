@@ -101,6 +101,7 @@ curl --location 'http://localhost:3333/api/v1/auth/password/forgot' \
 
 RESET PASSWORD API:
 PUT  ==>  http://localhost:3333/api/v1/auth/password/reset/77cfdf4f33f3a3e6e214df7ebb85ed0be452bdee
+          http://localhost:3333/api/v1/auth/password/reset/tokenOnMail
 
 BODY
 {
