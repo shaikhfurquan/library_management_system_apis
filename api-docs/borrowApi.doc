@@ -1,0 +1,38 @@
+BORROW BOOK APIS:
+
+RECORD BORROW BOOK API:
+POST  ==>  http://localhost:3333/api/v1/borrow/record-borrow-book/67cebd2678cbabf3708ee971
+           http://localhost:3333/api/v1/borrow/bookId
+
+BODY
+{
+    "email" : "user@gmail.com"
+}
+
+CURL:
+curl --location 'http://localhost:3333/api/v1/borrow/record-borrow-book/67cebd2678cbabf3708ee971' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M4NTc5ZWUyZTBiMWNiZGUzOGQ0NDciLCJpYXQiOjE3NDE5NDgxNjYsImV4cCI6MTc0MjIwNzM2Nn0.Lpt8BJpalZSkRbRDOHQ37W7GqF2fZNkytuIOK1tuCPw' \
+--data-raw '{
+    "email" : "user@gmail.com"
+}'
+
+
+
+
+RETURN BORROW BOOK API:
+PUT  ==>  http://localhost:3333/api/v1/borrow/return-borrowed-book/67cebd2678cbabf3708ee971
+          http://localhost:3333/api/v1/borrow/return-borrowed-book/bookId
+
+BODY
+{
+    "email" : "user@gmail.com"
+}
+
+CURL:
+curl --location --request PUT 'http://localhost:3333/api/v1/borrow/return-borrowed-book/67cebd2678cbabf3708ee971' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M4NTc5ZWUyZTBiMWNiZGUzOGQ0NDciLCJpYXQiOjE3NDE5NDgxNjYsImV4cCI6MTc0MjIwNzM2Nn0.Lpt8BJpalZSkRbRDOHQ37W7GqF2fZNkytuIOK1tuCPw' \
+--data-raw '{
+    "email" : "user@gmail.com"
+}'

@@ -8,6 +8,7 @@ import cookieParser from 'cookie-parser';
 import { errorMiddleware } from './middlewares/errorMiddleware.js';
 import authRouter from './routes/auth.route.js';
 import bookRouter from './routes/book.route.js';
+import borrowRouter from './routes/borrow.route.js';
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.get('/', (req, res) => {
 })
 app.use('/api/v1/auth' , authRouter)
 app.use('/api/v1/book' , bookRouter)
+app.use('/api/v1/borrow' , borrowRouter)
 
 // error middleware
 app.use(errorMiddleware)
