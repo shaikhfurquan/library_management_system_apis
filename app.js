@@ -10,6 +10,7 @@ import authRouter from './routes/auth.route.js';
 import bookRouter from './routes/book.route.js';
 import borrowRouter from './routes/borrow.route.js';
 import userRouter from './routes/user.route.js';
+import { notifyUsers } from './service/notify.user.js';
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use('/api/v1/book', bookRouter)
 app.use('/api/v1/borrow', borrowRouter)
 app.use('/api/v1/user', userRouter)
 
+notifyUsers()
 // error middleware
 app.use(errorMiddleware)
 
