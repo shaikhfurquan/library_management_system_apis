@@ -11,6 +11,7 @@ import bookRouter from './routes/book.route.js';
 import borrowRouter from './routes/borrow.route.js';
 import userRouter from './routes/user.route.js';
 import { notifyUsers } from './service/notify.user.js';
+import { removedUnverifiedAccounts } from './service/removedUnverifiedAccounts.js';
 
 const app = express();
 
@@ -39,9 +40,10 @@ app.use('/api/v1/book', bookRouter)
 app.use('/api/v1/borrow', borrowRouter)
 app.use('/api/v1/user', userRouter)
 
-// cron notifying the users(regarding the return book)
-notifyUsers()
 
+// Start cron jobs
+notifyUsers();                  // Cron job to notify users regarding overdue book returns
+removedUnverifiedAccounts();   // Cron job to remove unverified accounts
 
 // error middleware
 app.use(errorMiddleware)
