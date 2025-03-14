@@ -17,7 +17,7 @@ app.use(cors());
 app.use(morgan('dev'))
 app.use(fileUpload({
     useTempFiles: true,
-    // tempFileDir : '/tmp/'
+    tempFileDir : '/tmp/'
     // limits : {fileSize : 50 * 1024 * 1024}
 }))
 app.use(express.json());
