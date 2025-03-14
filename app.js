@@ -9,6 +9,7 @@ import { errorMiddleware } from './middlewares/errorMiddleware.js';
 import authRouter from './routes/auth.route.js';
 import bookRouter from './routes/book.route.js';
 import borrowRouter from './routes/borrow.route.js';
+import userRouter from './routes/user.route.js';
 
 const app = express();
 
@@ -17,7 +18,7 @@ app.use(cors());
 app.use(morgan('dev'))
 app.use(fileUpload({
     useTempFiles: true,
-    tempFileDir : '/tmp/'
+    tempFileDir: '/tmp/'
     // limits : {fileSize : 50 * 1024 * 1024}
 }))
 app.use(express.json());
@@ -32,9 +33,10 @@ app.get('/test', (req, res) => {
 app.get('/', (req, res) => {
     res.send('test routes');
 })
-app.use('/api/v1/auth' , authRouter)
-app.use('/api/v1/book' , bookRouter)
-app.use('/api/v1/borrow' , borrowRouter)
+app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/book', bookRouter)
+app.use('/api/v1/borrow', borrowRouter)
+app.use('/api/v1/user', userRouter)
 
 // error middleware
 app.use(errorMiddleware)

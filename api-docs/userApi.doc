@@ -1,0 +1,22 @@
+USER API DOCS:
+
+GET ALL USERS:
+GET  ==>  
+
+CURL:
+curl --location 'http://localhost:3333/api/v1/user/all-users' \
+--header 'Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M4NTc5ZWUyZTBiMWNiZGUzOGQ0NDciLCJpYXQiOjE3NDE5NDk0NjcsImV4cCI6MTc0MjIwODY2N30.2V5L-PxjlQ4MM2vNh3p8gCJ8e2YqPSz51M5WMNm9LFE'
+
+
+
+
+REGISTER NEW ADMIN:(ADMIN ONLY)
+POST  ==>  http://localhost:3333/api/v1/user/add/new-admin
+
+CURL:
+curl --location 'http://localhost:3333/api/v1/user/add/new-admin' \
+--header 'Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M4NTc5ZWUyZTBiMWNiZGUzOGQ0NDciLCJpYXQiOjE3NDE5NDk0NjcsImV4cCI6MTc0MjIwODY2N30.2V5L-PxjlQ4MM2vNh3p8gCJ8e2YqPSz51M5WMNm9LFE' \
+--form 'avatar=@"/C:/Users/intel/Downloads/share.png"' \
+--form 'name="khan"' \
+--form 'email="khan@gmail.com"' \
+--form 'password="12345678"'
