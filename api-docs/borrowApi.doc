@@ -36,3 +36,23 @@ curl --location --request PUT 'http://localhost:3333/api/v1/borrow/return-borrow
 --data-raw '{
     "email" : "user@gmail.com"
 }'
+
+
+
+GET MY BORROWED BOOKS API:
+GET  ==>  http://localhost:3333/api/v1/borrow/my-borrowed-books/
+
+CURL:
+curl --location 'http://localhost:3333/api/v1/borrow/my-borrowed-books/' \
+--header 'Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2QwOGFlYzVkOGQ3MDk5MTM4MDIxOWQiLCJpYXQiOjE3NDE5NDkyMTYsImV4cCI6MTc0MjIwODQxNn0.RRaVyNV89XF12fCJ3_-xfWeeg8VXskWKhI9EBiLOhoI'
+
+
+
+
+GET ALL BORROWED BOOKS OF ADMIN(FOR ADMIN)
+GET  ==> http://localhost:3333/api/v1/borrow/admin-borrowed-books-by-users
+
+
+CURL:
+curl --location 'http://localhost:3333/api/v1/borrow/admin-borrowed-books-by-users' \
+--header 'Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M4NTc5ZWUyZTBiMWNiZGUzOGQ0NDciLCJpYXQiOjE3NDE5NDk0NjcsImV4cCI6MTc0MjIwODY2N30.2V5L-PxjlQ4MM2vNh3p8gCJ8e2YqPSz51M5WMNm9LFE'

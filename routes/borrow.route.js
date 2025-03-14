@@ -9,6 +9,9 @@ borrowRouter.post('/record-borrow-book/:bookId', isAuthenticated, isAuthorized("
 
 borrowRouter.put('/return-borrowed-book/:bookId', isAuthenticated, isAuthorized("Admin"), borrowController.returnBorrowBooks)
 
+borrowRouter.get('/my-borrowed-books', isAuthenticated, borrowController.getMyBorrowedBooksForUser)
+
+borrowRouter.get('/admin-borrowed-books-by-users', isAuthenticated, isAuthorized("Admin"), borrowController.getAdminBorrowedBooksForAdmin)
 
 
 export default borrowRouter

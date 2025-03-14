@@ -124,3 +124,26 @@ export const returnBorrowBooks = catchAsyncError(async (req, res, next) => {
     });
 })
 
+
+
+export const getMyBorrowedBooksForUser = catchAsyncError(async (req, res, next) => {
+
+    const { borrowedBooks } = req.user
+    res.status(200).json({
+        success: true,
+        borrowedBooks
+    })
+
+});
+
+
+
+export const getAdminBorrowedBooksForAdmin = catchAsyncError(async (req, res, next) => {
+   
+    const borrowedBooks = await BorrowModel.find()
+    res.status(200).json({
+        success: true,
+        borrowedBooks
+    })
+
+});
